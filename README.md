@@ -182,7 +182,7 @@ This single command does everything:
 2. `build.rs` encodes the core module as a WASM component via `ComponentEncoder`
 3. `build.rs` AOT-compiles the component to Pulley bytecode via Cranelift → produces `blinky.cwasm`
 4. The firmware compiles for `thumbv8m.main-none-eabihf`, embedding the Pulley bytecode via `include_bytes!`
-5. The result is an ELF at `target/thumbv8m.main-none-eabihf/release/t-wasm`
+5. The result is an ELF at `target/thumbv8m.main-none-eabihf/release/embedded-wasm-blinky`
 
 ## Flashing
 
@@ -195,6 +195,34 @@ This builds the firmware and flashes it to the Pico 2 via `picotool` (configured
 > **Note:** Hold the **BOOTSEL** button on the Pico 2 while plugging in the USB cable to enter bootloader mode. Release once connected.
 
 After flashing, the LED on GPIO25 will begin blinking at 500ms intervals. If a USB-to-serial adapter is connected to GPIO0/GPIO1, you will see `GPIO25 On` and `GPIO25 Off` messages at 115200 baud.
+
+## Debugging (VS Code + probe-rs)
+
+### Prerequisites
+
+- [probe-rs](https://probe.rs/) installed
+- [probe-rs VS Code extension](https://marketplace.visualstudio.com/items?itemName=probe-rs.probe-rs-debugger) installed
+- Debug probe connected to the Pico 2 SWD pins (SWCLK, SWDIO, GND)
+
+### Usage
+
+1. Open the project in VS Code
+2. Set breakpoints in `src/main.rs` (or any source file)
+3. Press **F5** or select **Run -> Start Debugging**
+4. The `debuggable` profile builds with `release` optimizations + full debug symbols (`debug = 2`)
+5. probe-rs flashes the ELF and halts at your first breakpoint
+
+The pre-launch task runs:
+
+```bash
+cargo build --profile debuggable
+```
+
+This produces an ELF at `target/thumbv8m.main-none-eabihf/debuggable/embedded-wasm-blinky.elf`.
+
+### Variables Panel
+
+> **Warning:** Do **NOT** expand the **Static** dropdown in the Variables panel. It attempts to enumerate every static variable in the binary — including thousands from wasmtime internals — over the SWD link, causing an infinite spin. Use the **Locals** and **Registers** dropdowns instead.
 
 ## Testing
 

@@ -5,33 +5,17 @@
             "type": "probe-rs-debug",
             "request": "launch",
             "name": "probe-rs Debug",
-            "chip": "RP2350",
+            "preLaunchTask": "cargo build --profile debuggable",
+            "chip": "RP235x",
             "flashingConfig": {
-                "flashingEnabled": true,
-                "haltAfterReset": true
+                "flashingEnabled": false,
+                "haltAfterReset": false
             },
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "${workspaceFolder}/target/thumbv8m.main-none-eabihf/debug/t-wasm",
-                    "svdFile": "https://raw.githubusercontent.com/raspberrypi/pico-sdk/refs/heads/develop/src/rp2350/hardware_regs/RP2350.svd"
-                }
-            ]
-        },
-        {
-            "type": "probe-rs-debug",
-            "request": "launch",
-            "name": "probe-rs Debug (Release)",
-            "chip": "RP2350",
-            "flashingConfig": {
-                "flashingEnabled": true,
-                "haltAfterReset": true
-            },
-            "coreConfigs": [
-                {
-                    "coreIndex": 0,
-                    "programBinary": "${workspaceFolder}/target/thumbv8m.main-none-eabihf/release/t-wasm",
-                    "svdFile": "https://raw.githubusercontent.com/raspberrypi/pico-sdk/refs/heads/develop/src/rp2350/hardware_regs/RP2350.svd"
+                    "programBinary": "${workspaceFolder}/target/thumbv8m.main-none-eabihf/debuggable/embedded-wasm-blinky.elf",
+                    "svdFile": "${workspaceFolder}/.vscode/RP2350.svd"
                 }
             ]
         }

@@ -2,7 +2,7 @@
 //!
 //! Copyright (c) 2026 Kevin Thomas
 //!
-//! # Build Script for t-wasm Firmware
+//! # Build Script for embedded-wasm-blinky Firmware
 //!
 //! Sets up the RP2350 linker script, compiles the WASM blinky application,
 //! and AOT-compiles the WASM binary to Pulley bytecode for the RP2350.

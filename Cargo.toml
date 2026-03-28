@@ -1,6 +1,6 @@
 [package]
 edition = "2024"
-name = "t-wasm"
+name = "embedded-wasm-blinky"
 version = "0.1.0"
 license = "MIT"
 
@@ -29,3 +29,7 @@ wasmtime = { version = "43", default-features = false, features = [
     "component-model",
 ] }
 wit-component = "0.245"
+
+[profile.debuggable]
+inherits = "release"
+debug = 2

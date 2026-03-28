@@ -427,6 +427,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "edd0f118536f44f5ccd48bcb8b111bdc3de888b58c74639dfb034a357d0f206d"
 
 [[package]]
+name = "embedded-wasm-blinky"
+version = "0.1.0"
+dependencies = [
+ "cortex-m",
+ "cortex-m-rt",
+ "critical-section",
+ "embedded-alloc",
+ "embedded-hal 1.0.0",
+ "fugit",
+ "nb 1.1.0",
+ "rp235x-hal",
+ "wasmtime",
+ "wit-component",
+]
+
+[[package]]
 name = "encoding_rs"
 version = "0.8.35"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1129,22 +1145,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
-]
-
-[[package]]
-name = "t-wasm"
-version = "0.1.0"
-dependencies = [
- "cortex-m",
- "cortex-m-rt",
- "critical-section",
- "embedded-alloc",
- "embedded-hal 1.0.0",
- "fugit",
- "nb 1.1.0",
- "rp235x-hal",
- "wasmtime",
- "wit-component",
 ]
 
 [[package]]
